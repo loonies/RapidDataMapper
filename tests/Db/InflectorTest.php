@@ -5,8 +5,6 @@
  * All rights reserved.
  */
 
-require_once 'PHPUnit/Framework.php';
-
 /**
  * @covers Db_Inflector
  */

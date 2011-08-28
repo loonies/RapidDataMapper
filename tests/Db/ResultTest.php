@@ -5,8 +5,6 @@
  * All rights reserved.
  */
 
-require_once 'PHPUnit/Framework.php';
-
 require_once dirname(__FILE__).'/../../lib/Db/Result.php';
 
 /**
