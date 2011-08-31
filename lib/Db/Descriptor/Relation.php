@@ -203,7 +203,7 @@ class Db_Descriptor_Relation
 	 */
 	public function getRelatedDescriptor()
 	{
-		return Db::getDescriptor($this->getRelatedClass());
+		return Rdb::getDescriptor($this->getRelatedClass());
 	}
 	
 	// ------------------------------------------------------------------------

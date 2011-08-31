@@ -47,7 +47,7 @@ if(isset('.$object_var.'->'.$this->relation->getProperty().') && '.$object_var.'
 	
 		$str .= '
 		
-	Db::save('.$object_var.'->'.$this->relation->getProperty().');
+	Rdb::save('.$object_var.'->'.$this->relation->getProperty().');
 }';
 		
 		return $str;
@@ -102,7 +102,7 @@ if(isset('.$object_var.'->'.$this->relation->getProperty().') && '.$object_var.'
 	
 	'.implode("\n", $assignments).'
 	
-	Db::save('.$object_var.'->'.$this->relation->getProperty().');
+	Rdb::save('.$object_var.'->'.$this->relation->getProperty().');
 }';
 		
 		return $str;

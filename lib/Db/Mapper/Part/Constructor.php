@@ -21,7 +21,7 @@ class Db_Mapper_Part_Constructor extends Db_CodeBuilder_Method
 			$conn_name = "'".addcslashes($conn_name, "'")."'";
 		}
 		
-		$this->addPart('parent::__construct(Db::getConnection('.$conn_name.'));');
+		$this->addPart('parent::__construct(Rdb::getConnection('.$conn_name.'));');
 	}
 }
 

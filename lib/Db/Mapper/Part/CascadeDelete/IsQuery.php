@@ -49,7 +49,7 @@ $q_count = $this->db->select()->escape(false)->from($q, \'COUNT(1)\');');
 				$this->addPart('if($q_count->get()->val())
 {
 	// Go deeper in the relation tree
-	$m = Db::getMapper(\''.$rel->getRelatedDescriptor()->getClass().'\');
+	$m = Rdb::getMapper(\''.$rel->getRelatedDescriptor()->getClass().'\');
 	
 	if( ! $m->delete($q))
 	{

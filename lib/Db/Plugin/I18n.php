@@ -249,7 +249,7 @@ class Db_Plugin_I18n extends Db_Plugin
 	{
 		if( ! $mapper_object)
 		{
-			$mapper_object = 'Db::getMapper(\''.$this->descriptor->getClass().'\')';
+			$mapper_object = 'Rdb::getMapper(\''.$this->descriptor->getClass().'\')';
 		}
 		
 		$conds = array();

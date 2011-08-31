@@ -12,12 +12,12 @@ class Db_DescriptorTest extends PHPUnit_Framework_TestCase
 {
 	public function setUp()
 	{
-		require_once dirname(__FILE__).'/../../lib/Db.php';
+		require_once dirname(__FILE__).'/../../lib/Rdb.php';
 		
-		Db::initAutoload();
+		Rdb::initAutoload();
 		
 		// Dummy configuration
-		Db::setConnectionConfig(
+		Rdb::setConnectionConfig(
 		    array(
 		        'default' => array(
 		            'hostname' => 'localhost',
@@ -354,7 +354,7 @@ class Db_DescriptorTest extends PHPUnit_Framework_TestCase
 		
 		$this->assertTrue($desc->getConnection() instanceof Db_Connection, 'Assert that we get a connection object');
 		$this->assertEquals('default', $desc->getConnection()->getName());
-		$this->assertSame(Db::getConnection(), $desc->getConnection());
+		$this->assertSame(Rdb::getConnection(), $desc->getConnection());
 		
 		$c = $this->getMock('Db_Driver_Mysql_Connection', null, array('mock', array()));
 		$desc->setConnection($c);
@@ -365,7 +365,7 @@ class Db_DescriptorTest extends PHPUnit_Framework_TestCase
 	{
 		$desc = new Db_Descriptor();
 		
-		Db::setConnectionConfig(
+		Rdb::setConnectionConfig(
 			array(
 				'Mock' => array(
 					'dbdriver' => 'mysql'
@@ -376,7 +376,7 @@ class Db_DescriptorTest extends PHPUnit_Framework_TestCase
 		$desc->setConnectionName('Mock');
 		
 		$this->assertEquals('Mock', $desc->getConnection()->getName());
-		$this->assertSame(Db::getConnection('Mock'), $desc->getConnection());
+		$this->assertSame(Rdb::getConnection('Mock'), $desc->getConnection());
 	}
 	
 	// ------------------------------------------------------------------------

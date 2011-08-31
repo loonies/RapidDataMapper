@@ -285,7 +285,7 @@ abstract class Db_Connection
 		// write query redirection
 		if($this->redirect_write && $is_write)
 		{
-			return Db::getConnection($this->redirect_write)->query($sql);
+			return Rdb::getConnection($this->redirect_write)->query($sql);
 		}
 		
 		// is cache on, and is it a read query?
@@ -361,7 +361,7 @@ abstract class Db_Connection
 		// Redirect transaction start to the write instance
 		if($this->redirect_write)
 		{
-			return Db::getConnection($this->redirect_write)->transactionStart();
+			return Rdb::getConnection($this->redirect_write)->transactionStart();
 		}
 		
 		if($this->transaction)
@@ -396,7 +396,7 @@ abstract class Db_Connection
 		// Redirect transaction commit to the write instance
 		if($this->redirect_write)
 		{
-			return Db::getConnection($this->redirect_write)->transactionCommit();
+			return Rdb::getConnection($this->redirect_write)->transactionCommit();
 		}
 		
 		is_null($this->dbh) && $this->initDbh();
@@ -418,7 +418,7 @@ abstract class Db_Connection
 		// Redirect transaction rollback to the write instance
 		if($this->redirect_write)
 		{
-			return Db::getConnection($this->redirect_write)->transactionRollback();
+			return Rdb::getConnection($this->redirect_write)->transactionRollback();
 		}
 		
 		is_null($this->dbh) && $this->initDbh();
