@@ -252,7 +252,7 @@ class Db_MapperQuery extends Db_Query_Select
 				// go deeper
 				$old_alias = $old_alias.'-'.$relation;
 				$curr_alias =& $curr_alias[$relation];
-				$mapper = Db::getMapper($mapper->relations[$relation]);
+				$mapper = Rdb::getMapper($mapper->relations[$relation]);
 			}
 		}
 		

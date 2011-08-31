@@ -277,7 +277,7 @@ if( ! empty('.$object_var.'->'.$this->relation->getProperty().'))
 		// check so they are of the correct type
 		if($related instanceof '.$related->getClass().')
 		{
-			if(empty($related->__id) && ! Db::save($related))
+			if(empty($related->__id) && ! Rdb::save($related))
 			{
 				// failed save
 				continue;
@@ -397,7 +397,7 @@ if(isset('.$object_var.'->'.$this->relation->getProperty().'))
 		// check so they are of the correct type
 		if($related instanceof '.$related->getClass().')
 		{
-			if(empty($related->__id) && ! Db::save($related))
+			if(empty($related->__id) && ! Rdb::save($related))
 			{
 				// failed save
 				continue;

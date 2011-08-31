@@ -219,7 +219,7 @@ if( ! empty('.$object_var.'->'.$this->relation->getProperty().'))
 		
 		$str .= '
 			
-			Db::save($related);
+			Rdb::save($related);
 		}
 		else
 		{
@@ -325,7 +325,7 @@ if( ! empty('.$object_var.'->'.$this->relation->getProperty().'))
 		
 		$str .= '
 			
-			Db::save($related);
+			Rdb::save($related);
 		}
 		else
 		{
