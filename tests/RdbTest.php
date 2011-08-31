@@ -6,42 +6,42 @@
  */
 
 /**
- * @covers Db
+ * @covers Rdb
  * @runTestsInSeparateProcesses enabled
  * @preserveGlobalState disabled
  */
-class DbTest extends PHPUnit_Framework_TestCase
+class RdbTest extends PHPUnit_Framework_TestCase
 {
-	
+
 	public $preserveGlobalState = false;
-	
+
 	public function setUp()
 	{
-		require_once dirname(__FILE__).'/../lib/Db.php';
-		
-		Db::initAutoload();
+		require_once dirname(__FILE__).'/../lib/Rdb.php';
+
+		Rdb::initAutoload();
 	}
-	
+
 	// ------------------------------------------------------------------------
 
 	/**
-	 * Instantiation of Db class is not allowed.
+	 * Instantiation of Rdb class is not allowed.
 	 */
 	public function testClassInstantiation()
 	{
-		$reflection = new ReflectionClass('Db');
-		
+		$reflection = new ReflectionClass('Rdb');
+
 		$sum = false;
-		
+
 		$sum = ($sum OR $reflection->isAbstract());
-		
+
 		$c = $reflection->getConstructor();
-		
+
 		$sum = ($sum OR $c->isPrivate() OR $c->isProtected());
-		
+
 		$this->assertTrue($sum);
 	}
-	
+
 	// ------------------------------------------------------------------------
 
 	/**
@@ -49,68 +49,68 @@ class DbTest extends PHPUnit_Framework_TestCase
 	 */
 	public function testNoConnection()
 	{
-		Db::getConnection();
+		Rdb::getConnection();
 	}
 	/**
 	 * @expectedException Db_Connection_ConfigurationException
 	 */
 	public function testNoConnection2()
 	{
-		Db::setConnectionConfig('foobar', array('something' => 'to satisfy test'));
-		
-		Db::getConnection();
+		Rdb::setConnectionConfig('foobar', array('something' => 'to satisfy test'));
+
+		Rdb::getConnection();
 	}
 	/**
 	 * @expectedException Db_Connection_ConfigurationException
 	 */
 	public function testSetConnectionConfigInvalid()
 	{
-		Db::setConnectionConfig('testing');
+		Rdb::setConnectionConfig('testing');
 	}
 	/**
 	 * @expectedException Db_Connection_ConfigurationException
 	 */
 	public function testSetConnectionConfigInvalid2()
 	{
-		Db::setConnectionConfig(null);
+		Rdb::setConnectionConfig(null);
 	}
 	/**
 	 * @expectedException Db_Connection_ConfigurationException
 	 */
 	public function testSetConnectionConfigInvalid3()
 	{
-		Db::setConnectionConfig('test', array());
+		Rdb::setConnectionConfig('test', array());
 	}
-	
+
 	public function testGetDefaultConnection()
 	{
-		Db::setConnectionConfig('default', array('dbdriver' => 'mock'));
-		
+		Rdb::setConnectionConfig('default', array('dbdriver' => 'mock'));
+
 		eval('class Db_Driver_Mock_Connection {}');
-		
-		$this->assertTrue(Db::getConnection() instanceof Db_Driver_Mock_Connection);
+
+		$this->assertTrue(Rdb::getConnection() instanceof Db_Driver_Mock_Connection);
 	}
 	/**
 	 * @expectedException Db_Connection_ConfigurationException
 	 */
 	public function testSetDefaultConnectionName()
 	{
-		Db::setConnectionConfig('default', array('something' => 'to satisfy test'));
-		
-		Db::setDefaultConnectionName('foobar');
-		
-		Db::getConnection();
+		Rdb::setConnectionConfig('default', array('something' => 'to satisfy test'));
+
+		Rdb::setDefaultConnectionName('foobar');
+
+		Rdb::getConnection();
 	}
-	
+
 	public function testSetConnectionConfig()
 	{
-		Db::setConnectionConfig(array());
+		Rdb::setConnectionConfig(array());
 	}
-	
+
 	public function testGetConnection()
 	{
-		Db::setConnectionConfig(array('foobar' => array('dbdriver' => 'mock')));
-		
+		Rdb::setConnectionConfig(array('foobar' => array('dbdriver' => 'mock')));
+
 		// mock class to fetch the options passed to the constructor
 		eval('class Db_Driver_Mock_Connection
 		{
@@ -120,100 +120,100 @@ class DbTest extends PHPUnit_Framework_TestCase
 			public function getParams()
 				{ return $this->params; }
 		}');
-		
-		$c = Db::getConnection('foobar');
-		
+
+		$c = Rdb::getConnection('foobar');
+
 		$this->assertEquals(array('foobar', array('dbdriver' => 'mock')), $c->getParams());
-		
-		$this->assertSame($c, Db::getConnection('foobar'));
+
+		$this->assertSame($c, Rdb::getConnection('foobar'));
 	}
-	
+
 	/**
-	 * @covers Db::isChanged
+	 * @covers Rdb::isChanged
 	 */
 	public function testIsChanged()
 	{
 		$this->initIsChangedTest();
-		
+
 		$obj = new stdClass();
-		
+
 		// empty __id returns true
-		$this->assertTrue(Db::isChanged($obj));
-		
+		$this->assertTrue(Rdb::isChanged($obj));
+
 		// id makes it return false if __data cannot be found
 		$obj->__id = array('id' => 3);
-		$this->assertFalse(Db::isChanged($obj));
-		
+		$this->assertFalse(Rdb::isChanged($obj));
+
 		$obj->__data = array('ctitle' => 'Foo', 'cslug' => 'Bar');
-		
+
 		// we have a reference, so it should be modified
-		$this->assertTrue(Db::isChanged($obj));
-		
+		$this->assertTrue(Rdb::isChanged($obj));
+
 		// still modified after we've added one of the columns
 		$obj->title = 'Foo';
-		$this->assertTrue(Db::isChanged($obj));
-		
+		$this->assertTrue(Rdb::isChanged($obj));
+
 		// we're back to full
 		$obj->slug = 'Bar';
-		$this->assertFalse(Db::isChanged($obj));
-		
+		$this->assertFalse(Rdb::isChanged($obj));
+
 		// add additional
 		$obj->someother = 'Something';
-		$this->assertFalse(Db::isChanged($obj));
-		
+		$this->assertFalse(Rdb::isChanged($obj));
+
 		$obj->title = 'foo';
-		$this->assertTrue(Db::isChanged($obj));
-		
+		$this->assertTrue(Rdb::isChanged($obj));
+
 		$obj->slug = 'Bar2';
-		$this->assertTrue(Db::isChanged($obj));
+		$this->assertTrue(Rdb::isChanged($obj));
 	}
 	/**
-	 * @covers Db::isChanged
+	 * @covers Rdb::isChanged
 	 */
 	public function testIsChangedProperty()
 	{
 		$this->initIsChangedTest();
-		
+
 		$obj = new stdClass();
-		
+
 		// empty __id returns true
-		$this->assertTrue(Db::isChanged($obj, 'title'));
-		
+		$this->assertTrue(Rdb::isChanged($obj, 'title'));
+
 		// id makes it return false if __data cannot be found
 		$obj->__id = array('id' => 3);
-		$this->assertFalse(Db::isChanged($obj, 'title'));
-		
+		$this->assertFalse(Rdb::isChanged($obj, 'title'));
+
 		$obj->__data = array('ctitle' => 'Foo', 'cslug' => 'Bar');
-		
+
 		// we have a reference, so it should be modified
-		$this->assertTrue(Db::isChanged($obj, 'title'));
-		
+		$this->assertTrue(Rdb::isChanged($obj, 'title'));
+
 		// still modified after we've added one of the columns
 		$obj->title = 'Foo';
-		$this->assertFalse(Db::isChanged($obj, 'title'));
-		
+		$this->assertFalse(Rdb::isChanged($obj, 'title'));
+
 		// we're back to full
 		$obj->slug = 'Bar';
-		$this->assertFalse(Db::isChanged($obj, 'title'));
-		
+		$this->assertFalse(Rdb::isChanged($obj, 'title'));
+
 		// add additional
 		$obj->someother = 'Something';
-		$this->assertFalse(Db::isChanged($obj, 'title'));
-		
+		$this->assertFalse(Rdb::isChanged($obj, 'title'));
+
 		$obj->title = 'foo';
-		$this->assertTrue(Db::isChanged($obj, 'title'));
-		
+		$this->assertTrue(Rdb::isChanged($obj, 'title'));
+
 		$obj->slug = 'Bar2';
-		$this->assertTrue(Db::isChanged($obj, 'title'));
-		
-		$this->assertFalse(Db::isChanged($obj, 'someother'));
+		$this->assertTrue(Rdb::isChanged($obj, 'title'));
+
+		$this->assertFalse(Rdb::isChanged($obj, 'someother'));
 	}
-	
+
 	// ------------------------------------------------------------------------
 
 	/**
 	 * Initializes a mocked mapper class for use with the isChanged() tests.
-	 * 
+	 *
 	 * @return void
 	 */
 	public function initIsChangedTest()
@@ -232,5 +232,5 @@ class DbTest extends PHPUnit_Framework_TestCase
 }
 
 
-/* End of file DbTest.php */
+/* End of file RdbTest.php */
 /* Location: ./tests */
