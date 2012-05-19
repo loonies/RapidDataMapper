@@ -887,8 +887,8 @@ echo $o->name; // This is some name]]></programlisting>
 	public function __construct()
 	{
 		// ...
-		$this->add($this->newPrimaryKey('id')->setType(self::MANUAL));
-		$this->add($this->newPrimaryKey('lang')->setType(self::MANUAL));
+		$this->add($this->newPrimaryKey('id')->setPkType(self::MANUAL));
+		$this->add($this->newPrimaryKey('lang')->setPkType(self::MANUAL));
 	}
 }
 
