@@ -219,7 +219,7 @@ abstract class Db_Mapper
 		$mappers = array();
 		foreach($mapped_objects as $alias => $class)
 		{
-			$mappers[$alias] = Db::getMapper($class);
+			$mappers[$alias] = Rdb::getMapper($class);
 		}
 		
 		while($row = $result->next())

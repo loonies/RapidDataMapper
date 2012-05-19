@@ -316,7 +316,7 @@ class Db_Descriptor
 	 */
 	public function getConnection()
 	{
-		return empty($this->db_conn) ? Db::getConnection($this->getConnectionName()) : $this->db_conn;
+		return empty($this->db_conn) ? Rdb::getConnection($this->getConnectionName()) : $this->db_conn;
 	}
 	
 	// ------------------------------------------------------------------------

@@ -203,7 +203,7 @@ class Db_Descriptor_Relation
 	 */
 	public function getRelatedDescriptor()
 	{
-		return Db::getDescriptor($this->getRelatedClass());
+		return Rdb::getDescriptor($this->getRelatedClass());
 	}
 	
 	// ------------------------------------------------------------------------
@@ -272,7 +272,7 @@ class Db_Descriptor_Relation
 	 */
 	public function getOnDeleteAction()
 	{
-		return $this->on_delete ? $this->on_delete : Db_Descriptor::SET_NULL;
+		return $this->on_delete ? $this->on_delete : Db_Descriptor::NOTHING;
 	}
 	
 	// ------------------------------------------------------------------------

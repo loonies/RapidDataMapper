@@ -285,7 +285,7 @@ abstract class Db_Connection
 		// write query redirection
 		if($this->redirect_write && $is_write)
 		{
-			return Db::getConnection($this->redirect_write)->query($sql);
+			return Rdb::getConnection($this->redirect_write)->query($sql);
 		}
 		
 		// is cache on, and is it a read query?
@@ -358,6 +358,12 @@ abstract class Db_Connection
 	 */
 	public function transactionStart()
 	{
+		// Redirect transaction start to the write instance
+		if($this->redirect_write)
+		{
+			return Rdb::getConnection($this->redirect_write)->transactionStart();
+		}
+		
 		if($this->transaction)
 		{
 			throw new Db_Connection_TransactionNestingException();
@@ -366,7 +372,16 @@ abstract class Db_Connection
 		// Load database handle to be able to start a transaction
 		is_null($this->dbh) && $this->initDbh();
 		
-		return $this->startTransaction();
+		if($this->startTransaction())
+		{
+			$this->transaction = true;
+			
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 	
 	// ------------------------------------------------------------------------
@@ -378,6 +393,12 @@ abstract class Db_Connection
 	 */
 	public function transactionCommit()
 	{
+		// Redirect transaction commit to the write instance
+		if($this->redirect_write)
+		{
+			return Rdb::getConnection($this->redirect_write)->transactionCommit();
+		}
+		
 		is_null($this->dbh) && $this->initDbh();
 		
 		$this->transaction = false;
@@ -394,6 +415,12 @@ abstract class Db_Connection
 	 */
 	public function transactionRollback()
 	{
+		// Redirect transaction rollback to the write instance
+		if($this->redirect_write)
+		{
+			return Rdb::getConnection($this->redirect_write)->transactionRollback();
+		}
+		
 		is_null($this->dbh) && $this->initDbh();
 		
 		$this->transaction = false;

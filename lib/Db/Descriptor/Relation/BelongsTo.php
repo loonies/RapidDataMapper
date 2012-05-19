@@ -24,7 +24,7 @@ class Db_Descriptor_Relation_BelongsTo extends Db_Descriptor_Relation_HasOne
 {
 	// we have a related parent, try to save it
 	// to assure that we have an ok primary key
-	Db::save('.$object_var.'->'.$this->relation->getProperty().');
+	Rdb::save('.$object_var.'->'.$this->relation->getProperty().');
 	
 	';
 		
