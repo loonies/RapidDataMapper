@@ -8,30 +8,42 @@
 	xmlns:xi="http://www.w3.org/2001/XInclude"
 	xmlns:db="http://docbook.org/ns/docbook"
 	>
-	
+
 	<title>Change Log</title>
-	
+
 	<section>
 		<title>Version 0.6.2</title>
-		
+
 		<segmentedlist>
 			<?dbhtml list-presentation="list"?>
-			
+
 			<segtitle>Release Date</segtitle>
-			
+
 			<segtitle>Git tag</segtitle>
-			
+
 			<seglistitem>
 				<seg>In Development</seg>
-				
+
 				<seg>In Development</seg>
 			</seglistitem>
 		</segmentedlist>
-		
+
+		<para>
+			Changes:
+		</para>
+
+		<itemizedlist>
+			<listitem>
+				<para>
+					To avoid conflict with other libraries, renamed <varname>Db</varname> class to <varname>Rdb</varname>.
+				</para>
+			</listitem>
+		</itemizedlist>
+
 		<para>
 			Improvements:
 		</para>
-		
+
 		<itemizedlist>
 			<listitem>
 				<para>
@@ -40,7 +52,7 @@
 					to <varname>Db_Descriptor::NOTHING</varname>.
 				</para>
 			</listitem>
-			
+
 			<listitem>
 				<para>
 					Made the transaction methods
@@ -50,11 +62,11 @@
 				</para>
 			</listitem>
 		</itemizedlist>
-		
+
 		<para>
 			Bug fixes:
 		</para>
-		
+
 		<itemizedlist>
 			<listitem>
 				<para>
@@ -64,7 +76,7 @@
 					(which aren't allowed).
 				</para>
 			</listitem>
-			
+
 			<listitem>
 				<para>
 					Added missing <literal>return</literal> statements to <classname>Db_MapperQuery_Where</classname>
@@ -72,7 +84,7 @@
 					<function>whereNotIn</function> and <function>like</function>.
 				</para>
 			</listitem>
-			
+
 			<listitem>
 				<para>
 					Fixed bug with improper table name in UPDATE query for Has Many relations when
@@ -82,26 +94,26 @@
 			</listitem>
 		</itemizedlist>
 	</section>
-	
+
 	<section>
 		<title>Version 0.6.1</title>
-		
+
 		<segmentedlist>
 			<?dbhtml list-presentation="list"?>
-			
+
 			<segtitle>Release Date</segtitle>
-			
+
 			<segtitle>Git tag</segtitle>
-			
+
 			<seglistitem>
 				<seg>2010-04-07</seg>
-				
+
 				<seg>0.6.1</seg>
 			</seglistitem>
 		</segmentedlist>
-		
+
 		<para>New Features:</para>
-		
+
 		<itemizedlist>
 			<listitem>
 				<para>
@@ -112,9 +124,9 @@
 				</para>
 			</listitem>
 		</itemizedlist>
-		
+
 		<para>Bug fixes:</para>
-		
+
 		<itemizedlist>
 			<listitem>
 				<para>
@@ -123,14 +135,14 @@
 					of the same branch in the join tree (eg. "<literal>foo-bar</literal>" and
 					"<literal>foo-baz</literal>").
 				</para>
-				
+
 				<para>
 					This would cause an overwrite of the previous calls for the parts where they
 					share branches (so in the example above, "<literal>foo-*</literal>" would
 					disappear when calling "<literal>-&gt;related("foo-bar")</literal>").
 				</para>
 			</listitem>
-			
+
 			<listitem>
 				<para>
 					Fixed syntax error (a stray single quote) which arose if the
@@ -139,11 +151,11 @@
 				</para>
 			</listitem>
 		</itemizedlist>
-		
+
 		<para>
 			Updates to this manual:
 		</para>
-		
+
 		<itemizedlist>
 			<listitem>
 				<para>
@@ -152,28 +164,28 @@
 			</listitem>
 		</itemizedlist>
 	</section>
-	
+
 	<section>
 		<title>Version 0.6</title>
-		
+
 		<segmentedlist>
 			<?dbhtml list-presentation="list"?>
-			
+
 			<segtitle>Release Date</segtitle>
-			
+
 			<segtitle>Git tag</segtitle>
-			
+
 			<seglistitem>
 				<seg>2010-02-25</seg>
-				
+
 				<seg>0.6</seg>
 			</seglistitem>
 		</segmentedlist>
-		
+
 		<para>
 			New Features:
 		</para>
-		
+
 		<itemizedlist>
 			<listitem>
 				<para>
@@ -182,28 +194,28 @@
 						Connection Objects: Transactions</link> for more information.
 				</para>
 			</listitem>
-			
+
 			<listitem>
 				<para>
 					ON DELETE RESTRICT support for the relations using
 					<function linkend="funcref.Db_Descriptor_Relation-setOnDeleteAction">Db_Descriptor_Relation->setOnDeleteAction</function>.
 				</para>
 			</listitem>
-			
+
 			<listitem>
 				<para>
 					ON DELETE CASCADE support for the relations using
 					<function linkend="funcref.Db_Descriptor_Relation-setOnDeleteAction">Db_Descriptor_Relation->setOnDeleteAction</function>.
 				</para>
 			</listitem>
-			
+
 			<listitem>
 				<para>
 					ON DELETE SET NULL support for the relationships using
 					<function linkend="funcref.Db_Descriptor_Relation-setOnDeleteAction">Db_Descriptor_Relation->setOnDeleteAction</function>.
 				</para>
 			</listitem>
-			
+
 			<listitem>
 				<para>
 					Added new constant <varname>Db_Descriptor::NOTHING</varname>, to use with
@@ -213,11 +225,11 @@
 				</para>
 			</listitem>
 		</itemizedlist>
-		
+
 		<para>
 			Improvements:
 		</para>
-		
+
 		<itemizedlist>
 			<listitem>
 				<para>
@@ -227,11 +239,11 @@
 				</para>
 			</listitem>
 		</itemizedlist>
-		
+
 		<para>
 			Bug fixes:
 		</para>
-		
+
 		<itemizedlist>
 			<listitem>
 				<para>
@@ -240,7 +252,7 @@
 					not initialized.
 				</para>
 			</listitem>
-			
+
 			<listitem>
 				<para>
 					Fixed typo in the <filename>/compat/CodeIgniter/application/libraries/MY_Session.php</filename>
@@ -248,11 +260,11 @@
 				</para>
 			</listitem>
 		</itemizedlist>
-		
+
 		<para>
 			Updates to this manual:
 		</para>
-		
+
 		<itemizedlist>
 			<listitem>
 				<para>
@@ -261,19 +273,19 @@
 					Database Connection Objects: Transactions</link>
 				</para>
 			</listitem>
-			
+
 			<listitem>
 				<para>
 					ON DELETE RESTRICT is now marked as functional.
 				</para>
 			</listitem>
-			
+
 			<listitem>
 				<para>
 					ON DELETE CASCADE is now marked as functional.
 				</para>
 			</listitem>
-			
+
 			<listitem>
 				<para>
 					<function linkend="funcref.Db_Descriptor_Relation-setOnDeleteAction">Db_Descriptor_Relation->setOnDeleteAction</function>
@@ -283,28 +295,28 @@
 			</listitem>
 		</itemizedlist>
 	</section>
-	
+
 	<section>
 		<title>Version 0.5.1</title>
-		
+
 		<segmentedlist>
 			<?dbhtml list-presentation="list"?>
-			
+
 			<segtitle>Release Date</segtitle>
-			
+
 			<segtitle>Git tag</segtitle>
-			
+
 			<seglistitem>
 				<seg>2009-12-21</seg>
-				
+
 				<seg>0.5.1</seg>
 			</seglistitem>
 		</segmentedlist>
-		
+
 		<para>
 			New Features:
 		</para>
-		
+
 		<itemizedlist>
 			<listitem>
 				<para>
@@ -314,19 +326,19 @@
 					with a variant which uses proper key names to count by.
 				</para>
 			</listitem>
-			
+
 			<listitem>
 				<para>
 					Added the methods:
 				</para>
-				
+
 				<itemizedlist>
 					<listitem>
 						<para>
 							<function linkend="funcref.Db_Query-whereIsNull">Db_Query->whereIsNull</function>
 						</para>
 					</listitem>
-					
+
 					<listitem>
 						<para>
 							<function linkend="funcref.Db_Query-whereIsNotNull">Db_Query->whereIsNotNull</function>
@@ -335,23 +347,23 @@
 				</itemizedlist>
 			</listitem>
 		</itemizedlist>
-		
+
 		<para>
 			Improvements:
 		</para>
-		
+
 		<itemizedlist>
 			<listitem>
 				<para>
 					Increased performance of <function linkend="funcref.Db-isChanged">Db::isChanged</function>.
 				</para>
 			</listitem>
-			
+
 			<listitem>
 				<para>
 					Removed logging methods.
 				</para>
-				
+
 				<para>
 					It is better to let a framework / user code catch the errors using PHP instead of
 					having to push them to the framework / user.
@@ -359,30 +371,30 @@
 				</para>
 			</listitem>
 		</itemizedlist>
-		
+
 		<para>
 			Bug fixes:
 		</para>
-		
+
 		<itemizedlist>
 			<listitem>
 				<para>
 					Fixed faulty property name used in the <token>instanceof</token> <varname>$classname</varname>
 					check in the save part for the <emphasis>Has One</emphasis> relationship type.
 				</para>
-				
+
 				<para>
 					It generated "<literal>$object </literal>" instead of "<literal>$object->property</literal>".
 				</para>
 			</listitem>
-			
+
 			<listitem>
 				<para>
 					Fixed malfunctioning FROM part in some <abbrev>ORM</abbrev> queries which occurred
 					when the <link linkend="database_connection_objects.database_prefix">dbprefix</link> was used.
 				</para>
 			</listitem>
-			
+
 			<listitem>
 				<para>
 					Fixed broken <function linkend="funcref.Db-related">Db::related</function> method,
@@ -390,30 +402,30 @@
 				</para>
 			</listitem>
 		</itemizedlist>
-		
+
 		<para>
 			Updates to this manual:
 		</para>
-		
+
 		<itemizedlist>
 			<listitem>
 				<para>
 					Added a more readable example of the nested where conditions, using method-chaining.
 				</para>
 			</listitem>
-			
+
 			<listitem>
 				<para>
 					Added documentation for:
 				</para>
-				
+
 				<itemizedlist>
 					<listitem>
 						<para>
 							<function linkend="funcref.Db_MapperQuery-count">Db_MapperQuery->count</function>
 						</para>
 					</listitem>
-					
+
 					<listitem>
 						<para>
 							<function linkend="funcref.Db-isChanged">Db::isChanged</function>
@@ -423,24 +435,24 @@
 			</listitem>
 		</itemizedlist>
 	</section>
-	
+
 	<section>
 		<title>Version 0.5</title>
-		
+
 		<segmentedlist>
 			<?dbhtml list-presentation="list"?>
-			
+
 			<segtitle>Release Date</segtitle>
-			
+
 			<segtitle>Git tag</segtitle>
-			
+
 			<seglistitem>
 				<seg>2009-12-13</seg>
-				
+
 				<seg>0.5</seg>
 			</seglistitem>
 		</segmentedlist>
-		
+
 		<itemizedlist>
 			<listitem>
 				<para>
